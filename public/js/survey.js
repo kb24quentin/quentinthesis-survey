@@ -6,6 +6,9 @@
 (() => {
   'use strict';
 
+  // Bump this on each meaningful release — shown small on the start page.
+  const APP_VERSION = 'v1.0';
+
   const $ = (sel, root = document) => root.querySelector(sel);
   const el = (tag, cls, html) => {
     const n = document.createElement(tag);
@@ -98,6 +101,7 @@
           <div class="spacer"></div>
           <button class="btn btn-primary" id="startBtn">Begin survey ${ICON.arrow}</button>
         </div>
+        <div class="app-version">${APP_VERSION} &middot; Quentin Leopold</div>
       </div>`;
     $('#app').appendChild(wrap);
     $('#startBtn').addEventListener('click', () => goTo(1));

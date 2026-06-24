@@ -287,6 +287,16 @@ body { min-height: 100vh; overflow-x: hidden; }
 .fact b { font-weight: 700; }
 .fact span { color: var(--ink-faint); display: block; font-size: 0.78rem; }
 
+.app-version {
+  margin-top: 28px;
+  text-align: center;
+  font-size: 0.7rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  opacity: 0.7;
+}
+
 .consent {
   margin-top: 26px;
   padding: 18px 20px;
