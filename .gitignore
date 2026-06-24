@@ -7,3 +7,4 @@ data/responses.tmp.json
 seed-testdata.js
 gen-testfile.js
 seed-live-db.js
+seed-via-api.js
