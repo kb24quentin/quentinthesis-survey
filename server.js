@@ -31,7 +31,7 @@ const ADMIN_SECRET = process.env.ADMIN_SECRET || ('admin-secret::' + ADMIN_PASSW
 const TOKEN_TTL_MS = 1000 * 60 * 60 * 12; // 12 hours
 
 const app = express();
-app.use(express.json({ limit: '256kb' }));
+app.use(express.json({ limit: '4mb' })); // generous, to allow admin batch imports
 app.use(express.static(path.join(__dirname, 'public')));
 
 /* ----------------------------- Admin auth ------------------------------ */
@@ -176,6 +176,39 @@ app.get('/api/admin/responses/:id', requireAdmin, async (req, res) => {
   const row = await store.getById(req.params.id);
   if (!row) return res.status(404).json({ error: 'Not found' });
   res.json({ response: row, schema: { sections: SECTIONS, likertLabels: LIKERT_LABELS } });
+});
+
+// Admin-only batch import — insert responses with explicit timestamps.
+// Gated behind the admin token on purpose: the PUBLIC /api/submit must never
+// accept a client-supplied time, or anyone could forge submission dates.
+// Intended for seeding test data; clear it before collecting real responses.
+app.post('/api/admin/import', requireAdmin, async (req, res) => {
+  const list = Array.isArray(req.body && req.body.responses) ? req.body.responses : null;
+  if (!list || !list.length) return res.status(400).json({ error: 'Provide a non-empty "responses" array' });
+  if (list.length > 1000) return res.status(400).json({ error: 'Too many at once (max 1000)' });
+
+  let inserted = 0;
+  const errors = [];
+  for (let i = 0; i < list.length; i++) {
+    const item = list[i] || {};
+    const answers = item.answers || {};
+    const errs = validateSubmission(answers);
+    if (errs.length) { errors.push({ index: i, details: errs }); continue; }
+
+    let submittedAt = new Date().toISOString();
+    if (item.submittedAt && !Number.isNaN(Date.parse(item.submittedAt))) {
+      submittedAt = new Date(item.submittedAt).toISOString();
+    }
+    await store.insert({
+      submittedAt,
+      durationSeconds: Number.isFinite(item.durationSeconds) ? Math.round(item.durationSeconds) : null,
+      attentionPassed: computeAttention(answers),
+      userAgent: 'admin-import',
+      answers,
+    });
+    inserted++;
+  }
+  res.json({ ok: true, inserted, failed: errors.length, errors: errors.slice(0, 5) });
 });
 
 // Bulk delete — wipe ALL responses (e.g. to clear test data before launch).

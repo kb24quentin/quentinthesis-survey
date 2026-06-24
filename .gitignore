@@ -5,3 +5,5 @@ data/responses.tmp.json
 .DS_Store
 .vercel
 seed-testdata.js
+gen-testfile.js
+seed-live-db.js
