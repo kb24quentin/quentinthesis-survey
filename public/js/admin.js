@@ -53,6 +53,16 @@
 
   $('#logoutBtn').addEventListener('click', logout);
   $('#refreshBtn').addEventListener('click', loadAll);
+  $('#clearBtn').addEventListener('click', async () => {
+    const confirmText = prompt(
+      'This permanently deletes ALL responses (e.g. to clear test data before launch).\n\nType  DELETE  to confirm:'
+    );
+    if (confirmText !== 'DELETE') return;
+    const res = await api('/api/admin/responses', { method: 'DELETE' });
+    const data = await res.json();
+    alert(`Deleted ${data.deleted ?? 0} response(s).`);
+    loadAll();
+  });
   $('#exportBtn').addEventListener('click', () => {
     window.location.href = '/api/admin/export.xlsx?token=' + encodeURIComponent(token);
   });

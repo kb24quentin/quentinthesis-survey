@@ -178,6 +178,12 @@ app.get('/api/admin/responses/:id', requireAdmin, async (req, res) => {
   res.json({ response: row, schema: { sections: SECTIONS, likertLabels: LIKERT_LABELS } });
 });
 
+// Bulk delete — wipe ALL responses (e.g. to clear test data before launch).
+app.delete('/api/admin/responses', requireAdmin, async (_req, res) => {
+  const deleted = await store.clear();
+  res.json({ ok: true, deleted });
+});
+
 app.delete('/api/admin/responses/:id', requireAdmin, async (req, res) => {
   const ok = await store.remove(req.params.id);
   if (!ok) return res.status(404).json({ error: 'Not found' });

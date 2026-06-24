@@ -87,4 +87,10 @@ async function remove(id) {
   return rowCount > 0;
 }
 
-module.exports = { all, getById, insert, remove, backend: 'postgres' };
+async function clear() {
+  await ensureTable();
+  const { rowCount } = await pool.query('DELETE FROM responses');
+  return rowCount;
+}
+
+module.exports = { all, getById, insert, remove, clear, backend: 'postgres' };

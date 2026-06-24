@@ -72,5 +72,10 @@ function createFileStore() {
       write(db);
       return db.responses.length < before;
     },
+    async clear() {
+      const before = read().responses.length;
+      write({ responses: [], nextId: 1 });
+      return before;
+    },
   };
 }

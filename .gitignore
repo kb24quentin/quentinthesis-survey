@@ -4,3 +4,4 @@ data/responses.tmp.json
 *.log
 .DS_Store
 .vercel
+seed-testdata.js
