@@ -65,7 +65,10 @@ html, body {
   text-rendering: optimizeLegibility;
 }
 
-body { min-height: 100vh; overflow-x: hidden; }
+/* overflow-x: clip prevents any horizontal swipe without breaking the
+   sticky top bar (unlike overflow: hidden, clip creates no scroll container). */
+html { overflow-x: clip; }
+body { min-height: 100vh; overflow-x: clip; }
 
 /* Living gradient mesh background ---------------------------------------- */
 .bg-mesh {
@@ -207,7 +210,7 @@ body { min-height: 100vh; overflow-x: hidden; }
   z-index: 30;
   backdrop-filter: blur(14px) saturate(140%);
   -webkit-backdrop-filter: blur(14px) saturate(140%);
-  margin: -28px -20px 0;
+  margin: 0;
   padding: 14px 20px;
   border-bottom: 1px solid var(--line);
 }
@@ -512,7 +515,7 @@ body { min-height: 100vh; overflow-x: hidden; }
    ========================================================================= */
 @media (max-width: 560px) {
   .app { padding: 20px 14px 64px; }
-  .topbar { margin: -20px -14px 0; padding: 12px 14px; }
+  .topbar { margin: 0; padding: 12px 14px; }
   .q { padding: 18px 16px; }
   .likert { gap: 5px; }
   .likert button { padding: 11px 2px 9px; }
