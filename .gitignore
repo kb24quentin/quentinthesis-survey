@@ -1,0 +1,6 @@
+node_modules/
+data/responses.json
+data/responses.tmp.json
+*.log
+.DS_Store
+.vercel

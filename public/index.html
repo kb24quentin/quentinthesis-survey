@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<!-- Loyalty Survey · Coded by Quentin Leopold · Bachelor's Thesis 2026 -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="description" content="Research survey on the influence of loyalty programs on customer purchase behavior — Bachelor's Thesis by Quentin Leopold." />
+  <meta name="theme-color" content="#6366f1" />
+  <title>Loyalty Survey · Quentin Leopold</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/styles.css" />
+</head>
+<body>
+  <div class="bg-mesh"><i></i></div>
+
+  <!-- Loader -->
+  <div id="loader">
+    <div class="loader-inner">
+      <div class="loader-eyebrow">Bachelor&rsquo;s Thesis</div>
+      <div class="loader-name" id="loaderName" aria-label="by Quentin Leopold"></div>
+      <div class="loader-line"></div>
+      <div class="loader-progress"><b></b></div>
+    </div>
+  </div>
+
+  <!-- Top bar (hidden until survey starts) -->
+  <header class="topbar" id="topbar" style="display:none">
+    <div class="topbar-row">
+      <div class="brand"><span class="by">by</span> <span class="name">Quentin Leopold</span></div>
+      <div class="step-label" id="stepLabel"></div>
+    </div>
+    <div class="progress"><b id="progressBar"></b></div>
+  </header>
+
+  <main class="app" id="app"></main>
+
+  <script src="/js/survey.js"></script>
+</body>
+</html>

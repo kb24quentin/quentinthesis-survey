@@ -1,0 +1,137 @@
+/* Admin dashboard styles — builds on styles.css tokens
+   Coded by Quentin Leopold · Bachelor's Thesis 2026 */
+
+.admin-shell { max-width: 1080px; margin: 0 auto; padding: 28px 22px 80px; }
+
+/* Login ----------------------------------------------------------------- */
+.login-wrap { min-height: 80vh; display: grid; place-items: center; }
+.login-card {
+  width: min(400px, 92vw);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  padding: 40px 34px;
+  text-align: center;
+  backdrop-filter: blur(16px);
+}
+.login-card .logo {
+  width: 60px; height: 60px; margin: 0 auto 18px;
+  border-radius: 16px; background: var(--grad);
+  display: grid; place-items: center; box-shadow: var(--shadow-md);
+}
+.login-card .logo svg { width: 30px; height: 30px; color: #fff; }
+.login-card h1 { font-size: 1.5rem; margin: 0 0 4px; letter-spacing: -0.02em; }
+.login-card p { color: var(--ink-faint); font-size: 0.9rem; margin: 0 0 26px; }
+.field { text-align: left; margin-bottom: 16px; }
+.field label { font-size: 0.82rem; font-weight: 600; color: var(--ink-soft); display: block; margin-bottom: 7px; }
+.field input {
+  width: 100%; padding: 13px 15px;
+  border: 1.5px solid var(--line-strong); border-radius: var(--radius-sm);
+  font-family: inherit; font-size: 1rem; color: var(--ink); background: var(--surface-solid);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.field input:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px rgba(99,102,241,0.16); }
+.login-err { color: var(--rose); font-size: 0.85rem; margin: -4px 0 14px; min-height: 1.2em; }
+.login-card .btn { width: 100%; justify-content: center; }
+
+/* Dashboard header ------------------------------------------------------ */
+.admin-head { display: flex; align-items: center; gap: 16px; margin-bottom: 26px; flex-wrap: wrap; }
+.admin-head .title h1 { font-size: 1.7rem; margin: 0; letter-spacing: -0.02em; }
+.admin-head .title p { margin: 4px 0 0; color: var(--ink-faint); font-size: 0.88rem; }
+.admin-head .actions { margin-left: auto; display: flex; gap: 10px; flex-wrap: wrap; }
+.btn-sm { padding: 11px 18px; font-size: 0.9rem; }
+
+/* Stat cards ------------------------------------------------------------ */
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 14px; margin-bottom: 22px; }
+.stat {
+  background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);
+  padding: 20px; box-shadow: var(--shadow-sm);
+}
+.stat .k { font-size: 0.78rem; color: var(--ink-faint); letter-spacing: 0.04em; text-transform: uppercase; font-weight: 600; }
+.stat .v { font-size: 2.1rem; font-weight: 800; letter-spacing: -0.02em; margin-top: 6px; }
+.stat .v.grad { background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.stat .sub { font-size: 0.8rem; color: var(--ink-faint); margin-top: 2px; }
+
+/* Panels ---------------------------------------------------------------- */
+.panel {
+  background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);
+  box-shadow: var(--shadow-sm); margin-bottom: 22px; overflow: hidden;
+}
+.panel-head { padding: 16px 20px; border-bottom: 1px solid var(--line); display: flex; align-items: center; gap: 12px; }
+.panel-head h2 { font-size: 1.05rem; margin: 0; letter-spacing: -0.01em; }
+.panel-head .count { font-size: 0.82rem; color: var(--ink-faint); margin-left: auto; }
+
+/* Likert means bars */
+.means { padding: 14px 20px; }
+.mean-row { display: grid; grid-template-columns: 44px 1fr 46px; align-items: center; gap: 12px; padding: 7px 0; }
+.mean-row .ql { font-size: 0.8rem; font-weight: 700; color: var(--ink-soft); }
+.mean-row .ql .rev { color: var(--rose); font-size: 0.7rem; }
+.mean-bar { height: 10px; background: var(--line); border-radius: 99px; overflow: hidden; }
+.mean-bar b { display: block; height: 100%; border-radius: 99px; background: var(--grad); transition: width 0.8s var(--ease); }
+.mean-row .mv { font-size: 0.85rem; font-weight: 700; text-align: right; }
+.mean-row .qtext { grid-column: 1 / -1; font-size: 0.74rem; color: var(--ink-faint); margin: 0 0 0 56px; }
+
+/* Table ----------------------------------------------------------------- */
+.table-scroll { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+thead th {
+  text-align: left; padding: 13px 16px; font-size: 0.74rem; text-transform: uppercase;
+  letter-spacing: 0.05em; color: var(--ink-faint); font-weight: 700; white-space: nowrap;
+  border-bottom: 1px solid var(--line);
+}
+tbody td { padding: 13px 16px; border-bottom: 1px solid var(--line); white-space: nowrap; }
+tbody tr { transition: background 0.15s; }
+tbody tr:hover { background: rgba(99,102,241,0.05); }
+.pill { display: inline-block; padding: 3px 10px; border-radius: 99px; font-size: 0.74rem; font-weight: 700; }
+.pill.ok { background: rgba(16,185,129,0.14); color: #07815a; }
+.pill.fail { background: rgba(244,63,94,0.14); color: #c81e3f; }
+.pill.muted { background: var(--line); color: var(--ink-faint); }
+.pill.yes { background: rgba(99,102,241,0.14); color: var(--indigo); }
+.link-btn { background: none; border: none; color: var(--accent); font-weight: 600; cursor: pointer; font-size: 0.9rem; font-family: inherit; padding: 4px; }
+.link-btn:hover { text-decoration: underline; }
+.del-btn { color: var(--rose); }
+
+.empty { padding: 50px 20px; text-align: center; color: var(--ink-faint); }
+
+/* Modal ----------------------------------------------------------------- */
+.modal-bg {
+  position: fixed; inset: 0; z-index: 60; background: rgba(10,11,26,0.5);
+  backdrop-filter: blur(4px); display: none; place-items: center; padding: 20px;
+}
+.modal-bg.show { display: grid; animation: fadeIn 0.25s var(--ease); }
+.modal {
+  width: min(720px, 96vw); max-height: 88vh; overflow-y: auto;
+  background: var(--surface-solid); border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg); border: 1px solid var(--line);
+  animation: modalIn 0.35s var(--ease);
+}
+@keyframes fadeIn { from { opacity: 0; } }
+@keyframes modalIn { from { opacity: 0; transform: translateY(20px) scale(0.98); } }
+.modal-head {
+  position: sticky; top: 0; background: var(--surface-solid); z-index: 1;
+  padding: 20px 24px; border-bottom: 1px solid var(--line);
+  display: flex; align-items: center; gap: 12px;
+}
+.modal-head h2 { font-size: 1.2rem; margin: 0; letter-spacing: -0.02em; }
+.modal-head .x { margin-left: auto; background: var(--line); border: none; width: 34px; height: 34px; border-radius: 10px; cursor: pointer; font-size: 1.2rem; color: var(--ink-soft); line-height: 1; }
+.modal-head .x:hover { background: var(--line-strong); }
+.modal-body { padding: 16px 24px 28px; }
+.meta-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px,1fr)); gap: 10px; margin-bottom: 20px; }
+.meta-grid .m { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-sm); padding: 11px 14px; }
+.meta-grid .m .k { font-size: 0.72rem; color: var(--ink-faint); text-transform: uppercase; letter-spacing: 0.04em; }
+.meta-grid .m .v { font-weight: 700; margin-top: 3px; font-size: 0.95rem; }
+.ans-section { margin: 18px 0 8px; font-size: 0.78rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); }
+.ans { padding: 11px 0; border-bottom: 1px solid var(--line); }
+.ans .q { font-size: 0.9rem; color: var(--ink-soft); margin-bottom: 5px; }
+.ans .q b { color: var(--ink); }
+.ans .a { font-weight: 600; }
+.ans .a.empty { color: var(--ink-faint); font-weight: 400; font-style: italic; }
+.ans .a .chip { display: inline-block; background: rgba(99,102,241,0.12); color: var(--indigo); padding: 3px 10px; border-radius: 8px; margin: 2px 4px 2px 0; font-size: 0.85rem; }
+.ans .a .scale { display: inline-flex; align-items: center; gap: 8px; }
+.ans .a .scale .n { background: var(--grad); color: #fff; width: 26px; height: 26px; border-radius: 7px; display: grid; place-items: center; font-weight: 800; font-size: 0.85rem; }
+
+@media (max-width: 560px) {
+  .admin-shell { padding: 20px 14px 64px; }
+  .stat .v { font-size: 1.7rem; }
+}
